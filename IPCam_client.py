@@ -4,6 +4,7 @@ import pickle
 import cv2
 from PIL import Image
 from plate import Plate
+import time
 import os
 from IPCam import IPCam
 
