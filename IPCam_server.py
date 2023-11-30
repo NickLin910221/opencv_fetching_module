@@ -16,7 +16,7 @@ class Server:
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.socket.bind((self.SERVER_IP, self.SERVER_PORT))
         self.socket.listen(1)
-        print(f"Server start")
+        print(f"Server___________start!!!")
 
     def run(self):
         while True:
