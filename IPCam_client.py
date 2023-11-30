@@ -17,11 +17,13 @@ class Client:
         self.socket.connect((self.SERVER_IP, self.SERVER_PORT))
         self.cache_source = IPCam("ipcam_ip", 30)
         self.cache_source.run()
+        print(f"Client start!!!")
 
     def run(self):
         while True:
             img, _, status = self.cache_source.getimg()
-            self.send(Image.fromarray(cv2.cvtColor(img, cv2.COLOR_BGR2RGB)))                    
+            self.send(Image.fromarray(cv2.cvtColor(img, cv2.COLOR_BGR2RGB)))           
+            print(f"Send!!!")         
 
     def send(self, img):
         # Load and convert the image into a byte stream
