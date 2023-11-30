@@ -16,7 +16,7 @@ class Server:
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.socket.bind((self.SERVER_IP, self.SERVER_PORT))
         self.socket.listen(1)
-        print(f"Server___________start!!!")
+        print(f"Server start!!!")
 
     def run(self):
         while True:
@@ -53,7 +53,4 @@ class Server:
 
 if __name__ == "__main__":
     server = Server("0.0.0.0", 3030)
-    try:
-        server.run()
-    except KeyboardInterrupt:
-        server.close()
+    server.run()

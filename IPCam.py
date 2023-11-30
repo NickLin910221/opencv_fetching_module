@@ -41,6 +41,8 @@ class IPCam:
                 self.img = cv2.resize(img, [1280, 720], interpolation = cv2.INTER_AREA)
                 self.last_frame = time.time()
 
+                time.sleep(1/self.fps)
+
     def getentrance_name(self):
         return self.entrance_name
     
