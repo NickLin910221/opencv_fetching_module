@@ -7,9 +7,8 @@ from threading import Lock
 class IPCam:
     __slots__ = ["img", "status", "url", "entrance_name", "source", "flag", "nosignal", "fps", "last_frame", "lock"]
 
-    def __init__(self, url, entrance_name, fps, flag = True) -> None:
+    def __init__(self, url, fps, flag = True) -> None:
         self.url = url
-        self.entrance_name = entrance_name
         self.status = False
         self.last_frame = time.time()
         self.fps = fps
