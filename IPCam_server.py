@@ -41,7 +41,7 @@ class Server:
                         img = cv2.cvtColor(np.asarray(image), cv2.COLOR_RGB2BGR)
                     except Exception as e:
                         continue
-                    
+                    print(f"Received!!!")
                     cv2.imwrite('output.jpg', img)
 
             finally:

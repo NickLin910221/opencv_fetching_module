@@ -24,7 +24,7 @@ class Client:
         while True:
             img, _, status = self.cache_source.getimg()
             self.send(Image.fromarray(cv2.cvtColor(img, cv2.COLOR_BGR2RGB)))
-            time.sleep(2)     
+            time.sleep(1)
             print(f"Send!!!")         
 
     def send(self, img):
