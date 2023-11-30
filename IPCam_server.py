@@ -17,7 +17,7 @@ class Server:
         self.socket.bind((self.SERVER_IP, self.SERVER_PORT))
         self.socket.listen(1)
         print(f"Server start!!!")
-    
+
     def run(self):
         while True:
             connection, client_address = self.socket.accept()
