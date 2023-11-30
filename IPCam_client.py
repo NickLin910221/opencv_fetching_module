@@ -20,10 +20,8 @@ class Client:
 
     def run(self):
         while True:
-            for x in self.cache_source:
-                img, _, status = x.getimg()
-                if status == True:
-                    self.send(Image.fromarray(cv2.cvtColor(img, cv2.COLOR_BGR2RGB)))                    
+            img, _, status = self.cache_source.getimg()
+            self.send(Image.fromarray(cv2.cvtColor(img, cv2.COLOR_BGR2RGB)))                    
 
     def send(self, img):
         # Load and convert the image into a byte stream
