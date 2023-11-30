@@ -34,10 +34,14 @@ class Server:
 
                     try:
                         received_obj = pickle.loads(data)
+                        byte_stream = io.BytesIO(received_obj.img)
+                        image = Image.open(byte_stream)
+                        # image.save(OUTPUT_IMAGE_PATH)
+                        img = cv2.cvtColor(np.asarray(image), cv2.COLOR_RGB2BGR)
                     except Exception as e:
                         continue
                     
-                    cv2.imwrite('output.jpg', received_obj.img)
+                    cv2.imwrite('output.jpg', img)
 
             finally:
                 # Clean up the connection
