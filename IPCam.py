@@ -5,9 +5,9 @@ import time
 from threading import Lock
 
 class IPCam:
-    __slots__ = ["img", "status", "url", "entrance_name", "source", "flag", "nosignal", "fps", "last_frame", "lock"]
+    __slots__ = ["img", "status", "url", "entrance_name", "source", "nosignal", "fps", "last_frame", "lock"]
 
-    def __init__(self, url, fps, flag = True) -> None:
+    def __init__(self, url, fps) -> None:
         self.url = url
         self.status = False
         self.last_frame = time.time()
@@ -19,9 +19,6 @@ class IPCam:
 
     def run(self):
         threading.Thread(target=self.fetch, daemon=True, args=()).start()
-        
-    def fetch_status(self):
-        self.flag = False if self.flag else True
 
     def fetch(self):
         while True:
@@ -29,17 +26,14 @@ class IPCam:
             print(f"Status : {self.status}")
             # Reconnect while lost connection
             if not self.status:
-                if self.source.get(cv2.CAP_PROP_POS_MSEC) == self.source.get(cv2.CAP_PROP_FRAME_COUNT):
-                    break
-                else:
-                    self.source.release()
-                    time.sleep(1)
-                    self.source = cv2.VideoCapture(self.url)
-                    continue
+                self.source.release()
+                time.sleep(1)
+                self.source = cv2.VideoCapture(self.url)
+                continue
             self.img = cv2.resize(img, [1280, 720], interpolation = cv2.INTER_AREA)
             self.last_frame = time.time()
 
-            time.sleep(1/self.fps)
+            cv2.waitKey(1/self.fps)
 
     def getentrance_name(self):
         return self.entrance_name
