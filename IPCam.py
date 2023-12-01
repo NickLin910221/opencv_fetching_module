@@ -38,9 +38,9 @@ class IPCam:
         return self.entrance_name
     
     def getimg(self):
-        if (self.status is not None) and (self.img is not None):
-            return self.img.copy(), self.last_frame, True
-        elif self.status is False:
+        if self.status == False:
             return self.nosignal, self.last_frame, False
+        elif (self.status is not None) and (self.img is not None):
+            return self.img.copy(), self.last_frame, True
         else:
             return self.nosignal, self.last_frame, False
