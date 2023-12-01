@@ -25,22 +25,21 @@ class IPCam:
 
     def fetch(self):
         while True:
-            with self.lock:
-                self.status, img = self.source.read()
-                print(f"Status : {self.status}")
-                # Reconnect while lost connection
-                if not self.status:
-                    if self.source.get(cv2.CAP_PROP_POS_MSEC) == self.source.get(cv2.CAP_PROP_FRAME_COUNT):
-                        break
-                    else:
-                        self.source.release()
-                        time.sleep(1)
-                        self.source = cv2.VideoCapture(self.url)
-                        continue
-                self.img = cv2.resize(img, [1280, 720], interpolation = cv2.INTER_AREA)
-                self.last_frame = time.time()
+            self.status, img = self.source.read()
+            print(f"Status : {self.status}")
+            # Reconnect while lost connection
+            if not self.status:
+                if self.source.get(cv2.CAP_PROP_POS_MSEC) == self.source.get(cv2.CAP_PROP_FRAME_COUNT):
+                    break
+                else:
+                    self.source.release()
+                    time.sleep(1)
+                    self.source = cv2.VideoCapture(self.url)
+                    continue
+            self.img = cv2.resize(img, [1280, 720], interpolation = cv2.INTER_AREA)
+            self.last_frame = time.time()
 
-                time.sleep(1/self.fps)
+            time.sleep(1/self.fps)
 
     def getentrance_name(self):
         return self.entrance_name
