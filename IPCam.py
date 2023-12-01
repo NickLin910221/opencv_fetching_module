@@ -27,7 +27,7 @@ class IPCam:
         while True:
             with self.lock:
                 self.status, img = self.source.read()
-
+                print(f"Status : {self.status}")
                 # Reconnect while lost connection
                 if not self.status:
                     if self.source.get(cv2.CAP_PROP_POS_MSEC) == self.source.get(cv2.CAP_PROP_FRAME_COUNT):
