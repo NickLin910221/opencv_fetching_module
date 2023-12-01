@@ -23,7 +23,6 @@ class IPCam:
     def fetch(self):
         while True:
             self.status, img = self.source.read()
-            print(f"Status : {self.status}")
             # Reconnect while lost connection
             if not self.status:
                 self.source.release()
